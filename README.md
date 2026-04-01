@@ -34,15 +34,14 @@ Scan any domain to detect quantum-vulnerable encryption and get actionable recom
 
 ```
 quantumshield-ai/
-├── frontend/          # Next.js app
-│   ├── src/
-│   │   ├── app/       # Pages & layout
-│   │   ├── components/# UI components
-│   │   └── utils/     # API client
-│   └── .env.example
+├── src/
+│   ├── app/            # Pages & layout
+│   ├── components/     # UI components
+│   └── utils/          # API client
 ├── backend/
-│   ├── app.py         # FastAPI server
+│   ├── app.py          # FastAPI server
 │   └── requirements.txt
+├── package.json
 └── README.md
 ```
 
@@ -70,7 +69,6 @@ The API will be running at `http://localhost:8000`.
 ### 2. Frontend
 
 ```bash
-cd frontend
 npm install
 cp .env.example .env.local   # Set NEXT_PUBLIC_API_URL
 npm run dev
@@ -102,8 +100,7 @@ curl "http://localhost:8000/scan?domain=google.com"
 1. Push your code to GitHub
 2. Go to [vercel.com/new](https://vercel.com/new)
 3. Import your repository
-4. Set the **Root Directory** to `frontend`
-5. Add environment variable:
+4. Add environment variable:
    - `NEXT_PUBLIC_API_URL` = your deployed backend URL
 6. Click **Deploy**
 

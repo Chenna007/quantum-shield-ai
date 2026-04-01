@@ -5,8 +5,7 @@
       "name": "Frontend (Next.js)",
       "runtimeExecutable": "/Users/channa/.nvm/versions/node/v18.17.0/bin/node",
       "runtimeArgs": ["node_modules/.bin/next", "dev"],
-      "port": 3000,
-      "cwd": "frontend"
+      "port": 3000
     },
     {
       "name": "Backend (FastAPI)",
