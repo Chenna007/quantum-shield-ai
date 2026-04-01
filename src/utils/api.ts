@@ -86,8 +86,17 @@ export async function scanDomain(domain: string): Promise<ScanResult> {
   const base = API_URL || "/api";
   const res = await fetch(`${base}/scan?domain=${encodeURIComponent(domain)}`);
   if (!res.ok) {
-    const error = await res.json().catch(() => ({ detail: "Scan failed" }));
-    throw new Error(error.detail || `Error ${res.status}`);
+    const raw = await res.text();
+    let detail = "Scan failed";
+    try {
+      const parsed = JSON.parse(raw) as { detail?: string };
+      detail = parsed.detail || detail;
+    } catch {
+      if (raw?.trim()) {
+        detail = raw.trim();
+      }
+    }
+    throw new Error(detail || `Error ${res.status}`);
   }
-  return res.json();
+  return res.json() as Promise<ScanResult>;
 }

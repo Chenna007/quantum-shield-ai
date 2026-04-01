@@ -40,7 +40,17 @@ export async function GET(request: NextRequest) {
       cache: "no-store",
     });
 
-    const payload = await res.json().catch(() => ({ detail: "Scan failed" }));
+    const raw = await res.text();
+    let payload: Record<string, unknown>;
+    try {
+      payload = JSON.parse(raw) as Record<string, unknown>;
+    } catch {
+      payload = {
+        detail:
+          raw?.trim() || `Upstream backend returned non-JSON response (status ${res.status}).`,
+      };
+    }
+
     return NextResponse.json(payload, { status: res.status });
   } catch {
     return NextResponse.json(
