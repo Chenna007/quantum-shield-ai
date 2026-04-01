@@ -12,6 +12,7 @@ import FindingsCard from "@/components/FindingsCard";
 import InsightsCard from "@/components/InsightsCard";
 import ShareActions from "@/components/ShareActions";
 import Toast from "@/components/Toast";
+import HeroBackground from "@/components/HeroBackground";
 import { RiskPieChart, RiskBarChart, SecurityScoreGauge } from "@/components/Charts";
 import { ScanResult } from "@/utils/api";
 
@@ -68,8 +69,10 @@ export default function Home() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="mb-12 text-center"
+            className="relative mb-12 rounded-3xl border border-slate-800/50 bg-slate-900/35 px-6 py-10 text-center"
           >
+            <HeroBackground />
+
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -208,6 +211,7 @@ export default function Home() {
           <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-6 py-8 text-xs text-slate-500 sm:flex-row">
             <p>QuantumShield AI</p>
             <p>Post-Quantum Cybersecurity Risk Detection Platform</p>
+            <p>Designed and developed by Chenna Keshava</p>
           </div>
         </footer>
       </div>
