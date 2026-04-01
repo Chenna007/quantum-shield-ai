@@ -32,21 +32,21 @@ export default function Scanner({ onResult, onError, onScanStart }: ScannerProps
 
   return (
     <form onSubmit={handleScan} className="w-full max-w-2xl mx-auto">
-      <div className="relative flex items-center">
+      <div className="relative flex flex-col items-center gap-3 md:flex-row md:gap-0">
         <input
           type="text"
           value={domain}
           onChange={(e) => setDomain(e.target.value)}
           placeholder="Enter domain or URL (e.g. microsoft.com)"
           disabled={loading}
-          className="w-full rounded-2xl border border-slate-600/70 bg-slate-900/90 px-6 py-4 pr-40 text-lg text-slate-100 placeholder:text-slate-500 transition-all duration-300 focus:border-cyan-300 focus:outline-none focus:ring-1 focus:ring-cyan-300"
+          className="w-full rounded-2xl border border-slate-600/70 bg-slate-900/90 px-6 py-4 text-base text-slate-100 placeholder:text-slate-500 transition-all duration-300 focus:border-cyan-300 focus:outline-none focus:ring-1 focus:ring-cyan-300 md:pr-40 md:text-lg"
         />
         <motion.button
           type="submit"
           disabled={loading || !domain.trim()}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
-          className="absolute right-2 rounded-xl bg-cyan-400 px-6 py-2.5 font-semibold text-slate-900 transition-colors duration-200 hover:bg-cyan-300 disabled:cursor-not-allowed disabled:opacity-50"
+          className="w-full rounded-xl bg-cyan-400 px-6 py-3 font-semibold text-slate-900 transition-colors duration-200 hover:bg-cyan-300 disabled:cursor-not-allowed disabled:opacity-50 md:absolute md:right-2 md:w-auto md:py-2.5"
         >
           {loading ? (
             <span className="flex items-center gap-2">
