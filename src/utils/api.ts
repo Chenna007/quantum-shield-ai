@@ -1,4 +1,4 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
 
 export interface ScanResult {
   domain: string;
@@ -45,7 +45,8 @@ export interface ScanResult {
 }
 
 export async function scanDomain(domain: string): Promise<ScanResult> {
-  const res = await fetch(`${API_URL}/scan?domain=${encodeURIComponent(domain)}`);
+  const base = API_URL || "/api";
+  const res = await fetch(`${base}/scan?domain=${encodeURIComponent(domain)}`);
   if (!res.ok) {
     const error = await res.json().catch(() => ({ detail: "Scan failed" }));
     throw new Error(error.detail || `Error ${res.status}`);
