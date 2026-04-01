@@ -36,13 +36,13 @@ export default function LoadingOverlay() {
       </div>
       <div className="text-center">
         <motion.p
-          className="text-lg font-semibold text-foreground"
+          className="text-lg font-semibold text-slate-100"
           animate={{ opacity: [1, 0.5, 1] }}
           transition={{ duration: 1.5, repeat: Infinity }}
         >
-          Scanning for quantum vulnerabilities...
+          Scanning target...
         </motion.p>
-        <p className="text-sm text-muted mt-2">
+        <p className="mt-2 text-sm text-slate-400">
           Analyzing encryption, certificates, and post-quantum readiness
         </p>
       </div>

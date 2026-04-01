@@ -1,141 +1,207 @@
 # QuantumShield AI
 
-**Post-Quantum Cybersecurity Risk Detection Platform**
+Production-ready Post-Quantum Cybersecurity Risk Detection Platform.
 
-Scan any domain to detect quantum-vulnerable encryption and get actionable recommendations for migrating to post-quantum cryptography standards.
+QuantumShield AI is a startup-grade cybersecurity SaaS project that scans internet-facing domains for transport and crypto weaknesses, quantifies security posture with a weighted risk engine, and delivers actionable remediation guidance.
 
-![Next.js](https://img.shields.io/badge/Next.js-000?logo=nextdotjs&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?logo=tailwindcss&logoColor=white)
+## Why This Project Stands Out
 
----
+- Real vulnerability scanning in FastAPI (no paid APIs)
+- Advanced weighted risk engine with 0-100 score and risk bands
+- Rule-based intelligent insights for quantum-era readiness
+- Premium Next.js dashboard with animated charts and polished UX
+- Downloadable reports (PDF + JSON) and instant share actions
+- Deployable split architecture: Vercel frontend + Render/Railway backend
 
-## Features
+## Core Capabilities
 
-- **Quantum Risk Scoring** — Identifies RSA, ECDSA, DHE, and other algorithms vulnerable to Shor's algorithm
-- **Certificate Analysis** — Deep inspection of SSL/TLS certificates, cipher suites, and key exchange
-- **Visual Dashboard** — Risk distribution charts, encryption component analysis, and security score gauges
-- **Migration Recommendations** — Prioritized guidance for transitioning to NIST-approved PQC algorithms (CRYSTALS-Kyber, Dilithium, FALCON, SPHINCS+)
-- **Smooth Animations** — Framer Motion page transitions, loading states, and hover effects
+### 1. Real Vulnerability Scanning (Backend)
 
----
+- TLS/SSL handshake and certificate parsing
+- Cipher suite and TLS protocol detection
+- Open-port reconnaissance across common high-risk services
+- Security header analysis with missing-header severity tagging
+- HTTP to HTTPS redirect validation
+
+### 2. Advanced Risk Engine
+
+Weighted score across:
+
+- SSL/TLS risk
+- Header security risk
+- Port exposure risk
+- Quantum cryptography risk
+- Transport redirect posture
+
+Output:
+
+- Overall Security Score (0-100)
+- Risk Level: Secure, Moderate, High Risk
+- Risk breakdown object for charting and reporting
+
+### 3. Intelligent Insights Engine
+
+Rule-based security intelligence (no external AI API), including guidance like:
+
+- RSA and ECDHE quantum migration warnings
+- TLS version hardening recommendations
+- Header and network exposure prioritization
+
+### 4. Premium Dashboard Experience
+
+- Startup-grade landing and dashboard UI
+- Framer Motion transitions and loading states
+- Recharts visualizations:
+  - Pie chart (risk distribution)
+  - Bar chart (security metrics)
+  - Gauge-style score card
+
+### 5. Reporting and Sharing
+
+- Download report as PDF
+- Download full raw scan as JSON
+- Share via prefilled email (`mailto:`)
+- Share via WhatsApp (`wa.me`) with key findings
+- Toast UX feedback for share/export actions
 
 ## Tech Stack
 
-| Layer    | Technology                          |
-| -------- | ----------------------------------- |
-| Frontend | Next.js, Tailwind CSS, Framer Motion, Recharts |
-| Backend  | Python FastAPI                      |
-| Charts   | Recharts (Pie, Bar, Radial)         |
-
----
+- Frontend: Next.js 14, TypeScript, Tailwind CSS, Framer Motion, Recharts, jsPDF
+- Backend: FastAPI, Python socket/ssl/http clients
+- Deployment: Vercel (frontend), Render or Railway (backend)
 
 ## Project Structure
 
-```
+```text
 quantumshield-ai/
-├── src/
-│   ├── app/            # Pages & layout
-│   ├── components/     # UI components
-│   └── utils/          # API client
 ├── backend/
-│   ├── app.py          # FastAPI server
+│   ├── app.py
 │   └── requirements.txt
+├── src/
+│   ├── app/
+│   │   ├── page.tsx
+│   │   ├── layout.tsx
+│   │   └── api/scan/route.ts
+│   ├── components/
+│   └── utils/
+├── public/
 ├── package.json
 └── README.md
 ```
 
----
-
-## Getting Started
+## Local Development
 
 ### Prerequisites
 
-- Node.js >= 20
-- Python >= 3.10
+- Node.js 20+ recommended
+- Python 3.10+
 
-### 1. Backend
+### 1. Start Backend (FastAPI)
 
 ```bash
 cd backend
-python -m venv venv
-source venv/bin/activate    # Windows: venv\Scripts\activate
+python -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
-uvicorn app:app --reload
+uvicorn app:app --reload --host 0.0.0.0 --port 8000
 ```
 
-The API will be running at `http://localhost:8000`.
+Backend endpoint: `http://localhost:8000`
 
-### 2. Frontend
+### 2. Start Frontend (Next.js)
 
 ```bash
 npm install
-cp .env.example .env.local   # Set NEXT_PUBLIC_API_URL
+cp .env.example .env.local
 npm run dev
 ```
 
-Open `http://localhost:3000` in your browser.
+Frontend endpoint: `http://localhost:3000`
 
----
+## Environment Variables
+
+Use `.env.local` in the frontend root:
+
+```bash
+NEXT_PUBLIC_API_URL=http://localhost:8000
+BACKEND_API_URL=http://localhost:8000
+```
+
+Notes:
+
+- Frontend client uses `NEXT_PUBLIC_API_URL`.
+- Next API proxy route uses `BACKEND_API_URL` first, then falls back to `NEXT_PUBLIC_API_URL`.
 
 ## API Endpoints
 
-| Method | Endpoint         | Description                    |
-| ------ | ---------------- | ------------------------------ |
-| GET    | `/`              | Health check                   |
-| GET    | `/scan?domain=`  | Scan domain for quantum risks  |
+### `GET /`
 
-### Example
+Health check.
 
-```bash
-curl "http://localhost:8000/scan?domain=google.com"
-```
+### `GET /scan?domain=example.com`
 
----
+Runs a real scan and returns:
+
+- Domain certificate metadata
+- TLS/cipher details
+- Header posture and missing controls
+- Open ports and exposure risks
+- Findings, insights, recommendations
+- Overall risk score and chart-ready data
 
 ## Deployment
 
-### Frontend — Vercel
+## Frontend on Vercel
 
-1. Push your code to GitHub
-2. Go to [vercel.com/new](https://vercel.com/new)
-3. Import your repository
-4. Add environment variable:
-   - `NEXT_PUBLIC_API_URL` = your deployed backend URL
-6. Click **Deploy**
+1. Push repository to GitHub.
+2. Import project into Vercel.
+3. Add env vars:
+   - `NEXT_PUBLIC_API_URL=https://<your-backend-domain>`
+   - `BACKEND_API_URL=https://<your-backend-domain>`
+4. Deploy.
 
-### Backend — Render
+## Backend on Render
 
-1. Go to [render.com](https://render.com) and create a new **Web Service**
-2. Connect your GitHub repository
-3. Set:
-   - **Root Directory**: `backend`
-   - **Build Command**: `pip install -r requirements.txt`
-   - **Start Command**: `uvicorn app:app --host 0.0.0.0 --port $PORT`
-4. Deploy
+1. Create a new Web Service from your GitHub repo.
+2. Root directory: `backend`
+3. Build command:
 
-### Backend — Railway
+```bash
+pip install -r requirements.txt
+```
 
-1. Go to [railway.app](https://railway.app) and create a new project
-2. Connect your GitHub repository
-3. Set the **Root Directory** to `backend`
-4. Add start command: `uvicorn app:app --host 0.0.0.0 --port $PORT`
-5. Deploy
+4. Start command:
 
----
+```bash
+uvicorn app:app --host 0.0.0.0 --port 10000
+```
 
-## Push to GitHub
+## Backend on Railway
+
+1. Create project from GitHub repo.
+2. Set root directory to `backend`.
+3. Start command:
+
+```bash
+uvicorn app:app --host 0.0.0.0 --port 10000
+```
+
+## GitHub Commands
 
 ```bash
 git init
 git add .
-git commit -m "Initial commit: QuantumShield AI platform"
-git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/quantumshield-ai.git
+git commit -m "Initial commit"
+git remote add origin <repo_url>
 git push -u origin main
 ```
 
----
+## Demo Checklist
+
+- Enter a target domain and run scan
+- Review score, findings, and charts
+- Download PDF and JSON report
+- Share scan via email or WhatsApp
 
 ## License
 

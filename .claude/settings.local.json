@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --use-npm --no-turbopack)",
+      "Bash(npm install:*)",
+      "Bash(npm run:*)",
+      "Bash(npx tailwindcss:*)",
+      "Bash(bash -l -c 'nvm use 18.17.0 && cd \"\"/Users/channa/Documents/Claude Projects /QuantumShield/frontend\"\" && npm run build')",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(python3 -c \"import uvicorn; print\\(''uvicorn available''\\)\")",
+      "Bash(pip3 install:*)",
+      "Bash(mkdir -p ~/.ssh)",
+      "Bash(~/.ssh/known_hosts)",
+      "Bash(git config:*)",
+      "Bash(bash -l -c 'nvm use 18.17.0 && cd \"\"/Users/channa/Documents/Claude Projects /QuantumShield\"\" && npm run build')",
+      "Bash(bash -l -c 'nvm use 18.17.0 && curl -s \"\"http://localhost:3000/api/scan?domain=google.com\"\" | head -200')"
+    ]
+  }
+}

@@ -4,9 +4,9 @@ import { motion } from "framer-motion";
 import { ScanResult } from "@/utils/api";
 
 const priorityStyles: Record<string, string> = {
-  high: "bg-danger/10 text-danger border-danger/20",
-  medium: "bg-warning/10 text-warning border-warning/20",
-  info: "bg-accent/10 text-accent-light border-accent/20",
+  high: "border-rose-400/30 bg-rose-500/10 text-rose-200",
+  medium: "border-amber-400/30 bg-amber-500/10 text-amber-200",
+  info: "border-cyan-300/30 bg-cyan-500/10 text-cyan-200",
 };
 
 const priorityIcons: Record<string, string> = {
@@ -21,10 +21,10 @@ export default function RecommendationCard({ data }: { data: ScanResult }) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.3 }}
-      className="bg-card border border-card-border rounded-2xl p-6"
+      className="rounded-2xl border border-slate-700/70 bg-slate-900/65 p-6"
     >
-      <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-        <span className="w-2 h-2 rounded-full bg-accent" />
+      <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-slate-100">
+        <span className="h-2 w-2 rounded-full bg-cyan-300" />
         Recommendations
       </h3>
       <div className="space-y-3">
@@ -41,8 +41,8 @@ export default function RecommendationCard({ data }: { data: ScanResult }) {
                 {priorityIcons[rec.priority] || "i"}
               </span>
               <div>
-                <p className="font-semibold text-sm text-foreground">{rec.title}</p>
-                <p className="text-xs text-muted mt-1 leading-relaxed">{rec.description}</p>
+                <p className="text-sm font-semibold text-slate-100">{rec.title}</p>
+                <p className="mt-1 text-xs leading-relaxed text-slate-300">{rec.description}</p>
               </div>
             </div>
           </motion.div>

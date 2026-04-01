@@ -37,24 +37,24 @@ export default function Scanner({ onResult, onError, onScanStart }: ScannerProps
           type="text"
           value={domain}
           onChange={(e) => setDomain(e.target.value)}
-          placeholder="Enter domain (e.g. google.com)"
+          placeholder="Enter domain or URL (e.g. microsoft.com)"
           disabled={loading}
-          className="w-full px-6 py-4 bg-card border border-card-border rounded-2xl text-foreground text-lg placeholder:text-muted focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-300 pr-36"
+          className="w-full rounded-2xl border border-slate-600/70 bg-slate-900/90 px-6 py-4 pr-40 text-lg text-slate-100 placeholder:text-slate-500 transition-all duration-300 focus:border-cyan-300 focus:outline-none focus:ring-1 focus:ring-cyan-300"
         />
         <motion.button
           type="submit"
           disabled={loading || !domain.trim()}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
-          className="absolute right-2 px-6 py-2.5 bg-accent hover:bg-accent-light text-white font-semibold rounded-xl transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="absolute right-2 rounded-xl bg-cyan-400 px-6 py-2.5 font-semibold text-slate-900 transition-colors duration-200 hover:bg-cyan-300 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {loading ? (
             <span className="flex items-center gap-2">
               <LoadingSpinner />
-              Scanning...
+              Scanning target...
             </span>
           ) : (
-            "Start Scan"
+            "Scan Your System"
           )}
         </motion.button>
       </div>

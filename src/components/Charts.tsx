@@ -17,17 +17,15 @@ import {
 import { ScanResult } from "@/utils/api";
 
 const riskBarColors: Record<string, string> = {
-  critical: "#ef4444",
-  high: "#f97316",
-  medium: "#f59e0b",
-  low: "#22c55e",
+  high_risk: "#ff5d5d",
+  moderate: "#f7b643",
+  secure: "#27d88f",
 };
 
 const gaugeColors: Record<string, string> = {
-  critical: "#ef4444",
-  high: "#f97316",
-  medium: "#f59e0b",
-  low: "#22c55e",
+  high_risk: "#ff5d5d",
+  moderate: "#f7b643",
+  secure: "#27d88f",
 };
 
 export function RiskPieChart({ data }: { data: ScanResult }) {
@@ -38,10 +36,10 @@ export function RiskPieChart({ data }: { data: ScanResult }) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.4 }}
-      className="bg-card border border-card-border rounded-2xl p-6"
+      className="rounded-2xl border border-slate-700/70 bg-slate-900/65 p-6"
     >
-      <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-        <span className="w-2 h-2 rounded-full bg-accent" />
+      <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-slate-100">
+        <span className="h-2 w-2 rounded-full bg-cyan-300" />
         Risk Distribution
       </h3>
       <div className="flex items-center justify-center">
@@ -65,7 +63,7 @@ export function RiskPieChart({ data }: { data: ScanResult }) {
             <Tooltip
               contentStyle={{
                 backgroundColor: "#111827",
-                border: "1px solid #1f2937",
+                border: "1px solid #334155",
                 borderRadius: "12px",
                 fontSize: "12px",
                 color: "#f9fafb",
@@ -81,7 +79,7 @@ export function RiskPieChart({ data }: { data: ScanResult }) {
               className="w-3 h-3 rounded-full"
               style={{ backgroundColor: entry.color }}
             />
-            <span className="text-muted">
+            <span className="text-slate-400">
               {entry.name} ({entry.value})
             </span>
           </div>
@@ -99,29 +97,29 @@ export function RiskBarChart({ data }: { data: ScanResult }) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.5 }}
-      className="bg-card border border-card-border rounded-2xl p-6"
+      className="rounded-2xl border border-slate-700/70 bg-slate-900/65 p-6"
     >
-      <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-        <span className="w-2 h-2 rounded-full bg-accent" />
-        Encryption Components
+      <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-slate-100">
+        <span className="h-2 w-2 rounded-full bg-cyan-300" />
+        Security Metrics
       </h3>
       <ResponsiveContainer width="100%" height={220}>
         <BarChart data={barData} margin={{ top: 5, right: 10, left: -10, bottom: 5 }}>
           <XAxis
             dataKey="name"
-            tick={{ fill: "#6b7280", fontSize: 11 }}
-            axisLine={{ stroke: "#1f2937" }}
+            tick={{ fill: "#94a3b8", fontSize: 11 }}
+            axisLine={{ stroke: "#334155" }}
             tickLine={false}
           />
           <YAxis
-            tick={{ fill: "#6b7280", fontSize: 11 }}
-            axisLine={{ stroke: "#1f2937" }}
+            tick={{ fill: "#94a3b8", fontSize: 11 }}
+            axisLine={{ stroke: "#334155" }}
             tickLine={false}
           />
           <Tooltip
             contentStyle={{
               backgroundColor: "#111827",
-              border: "1px solid #1f2937",
+              border: "1px solid #334155",
               borderRadius: "12px",
               fontSize: "12px",
               color: "#f9fafb",
@@ -136,7 +134,7 @@ export function RiskBarChart({ data }: { data: ScanResult }) {
             {barData.map((entry, index) => (
               <Cell
                 key={index}
-                fill={riskBarColors[entry.risk] || "#6366f1"}
+                fill={riskBarColors[entry.risk] || "#38bdf8"}
               />
             ))}
           </Bar>
@@ -148,7 +146,7 @@ export function RiskBarChart({ data }: { data: ScanResult }) {
 
 export function SecurityScoreGauge({ data }: { data: ScanResult }) {
   const { score, level } = data.charts.score_gauge;
-  const color = gaugeColors[level] || "#6366f1";
+  const color = gaugeColors[level] || "#38bdf8";
   const gaugeData = [{ name: "Score", value: score, fill: color }];
 
   return (
@@ -156,10 +154,10 @@ export function SecurityScoreGauge({ data }: { data: ScanResult }) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.6 }}
-      className="bg-card border border-card-border rounded-2xl p-6"
+      className="rounded-2xl border border-slate-700/70 bg-slate-900/65 p-6"
     >
-      <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-        <span className="w-2 h-2 rounded-full bg-accent" />
+      <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-slate-100">
+        <span className="h-2 w-2 rounded-full bg-cyan-300" />
         Security Score
       </h3>
       <div className="flex items-center justify-center">
@@ -188,8 +186,8 @@ export function SecurityScoreGauge({ data }: { data: ScanResult }) {
         <span className="text-3xl font-bold" style={{ color }}>
           {score}
         </span>
-        <span className="text-muted text-sm">/100</span>
-        <p className="text-xs text-muted mt-1 capitalize">{level} risk</p>
+        <span className="text-sm text-slate-400">/100</span>
+        <p className="mt-1 text-xs capitalize text-slate-400">{level.replace("_", " ")}</p>
       </div>
     </motion.div>
   );

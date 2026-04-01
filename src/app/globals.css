@@ -3,9 +3,13 @@
 @tailwind utilities;
 
 body {
-  background-color: #030712;
-  color: #f9fafb;
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  background:
+    radial-gradient(circle at 12% 10%, rgba(14, 116, 144, 0.2), transparent 38%),
+    radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.16), transparent 40%),
+    radial-gradient(circle at 48% 86%, rgba(244, 63, 94, 0.12), transparent 45%),
+    #020617;
+  color: #e2e8f0;
+  font-family: var(--font-space-grotesk), system-ui, sans-serif;
 }
 
 ::-webkit-scrollbar {

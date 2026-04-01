@@ -19,35 +19,41 @@ export default function DomainInfoCard({ data }: { data: ScanResult }) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="bg-card border border-card-border rounded-2xl p-6"
+      className="rounded-2xl border border-slate-700/70 bg-slate-900/65 p-6"
     >
-      <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-        <span className="w-2 h-2 rounded-full bg-accent" />
+      <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-slate-100">
+        <span className="h-2 w-2 rounded-full bg-cyan-300" />
         Domain Information
       </h3>
-      <div className="space-y-3">
+      <div className="space-y-3 text-slate-200">
         {rows.map((row) => (
           <div key={row.label} className="flex justify-between items-center text-sm">
-            <span className="text-muted">{row.label}</span>
-            <span className="text-foreground font-mono text-xs max-w-[60%] truncate text-right">
+            <span className="text-slate-400">{row.label}</span>
+            <span className="max-w-[60%] truncate text-right font-mono text-xs text-slate-100">
               {row.value}
             </span>
           </div>
         ))}
+        <div className="flex justify-between items-center text-sm">
+          <span className="text-slate-400">Resolved IPs</span>
+          <span className="max-w-[60%] truncate text-right font-mono text-xs text-slate-100">
+            {data.ip_addresses.length ? data.ip_addresses.join(", ") : "N/A"}
+          </span>
+        </div>
         {info.san.length > 0 && (
-          <div className="pt-3 border-t border-card-border">
-            <span className="text-muted text-sm">Subject Alt Names</span>
+          <div className="border-t border-slate-700 pt-3">
+            <span className="text-sm text-slate-400">Subject Alt Names</span>
             <div className="flex flex-wrap gap-1.5 mt-2">
               {info.san.slice(0, 5).map((san) => (
                 <span
                   key={san}
-                  className="px-2 py-0.5 text-xs bg-accent/10 text-accent-light rounded-md font-mono"
+                  className="rounded-md bg-cyan-400/10 px-2 py-0.5 font-mono text-xs text-cyan-200"
                 >
                   {san}
                 </span>
               ))}
               {info.san.length > 5 && (
-                <span className="px-2 py-0.5 text-xs text-muted">
+                <span className="px-2 py-0.5 text-xs text-slate-400">
                   +{info.san.length - 5} more
                 </span>
               )}
