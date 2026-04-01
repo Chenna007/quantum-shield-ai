@@ -1,11 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 
-function getBackendUrl(): string {
-  return (
-    process.env.BACKEND_API_URL ||
-    process.env.NEXT_PUBLIC_API_URL ||
-    "http://localhost:8000"
-  ).replace(/\/$/, "");
+function getBackendUrl(): string | null {
+  const configured = process.env.BACKEND_API_URL || process.env.NEXT_PUBLIC_API_URL;
+  if (configured) return configured.replace(/\/$/, "");
+
+  // Local development fallback only.
+  if (process.env.NODE_ENV !== "production") {
+    return "http://localhost:8000";
+  }
+
+  return null;
 }
 
 export async function GET(request: NextRequest) {
@@ -15,6 +19,16 @@ export async function GET(request: NextRequest) {
   }
 
   const backendUrl = getBackendUrl();
+  if (!backendUrl) {
+    return NextResponse.json(
+      {
+        detail:
+          "Backend URL is not configured. Set BACKEND_API_URL (or NEXT_PUBLIC_API_URL) in Vercel Environment Variables.",
+      },
+      { status: 500 },
+    );
+  }
+
   const endpoint = `${backendUrl}/scan?domain=${encodeURIComponent(domain)}`;
 
   try {
@@ -30,7 +44,9 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(payload, { status: res.status });
   } catch {
     return NextResponse.json(
-      { detail: "Backend scanner is unavailable. Please try again." },
+      {
+        detail: `Backend scanner is unavailable at ${backendUrl}. Verify backend deployment and Vercel env vars.`,
+      },
       { status: 502 },
     );
   }
